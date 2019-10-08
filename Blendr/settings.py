@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import pyrebase
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -70,16 +69,12 @@ WSGI_APPLICATION = 'Blendr.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-firebaseConfig = {
-    "apiKey": "AIzaSyDmv7TUeHMoLSz1sG5a38iE4SdZPBY08Oo",
-    "authDomain": "blendr-c1bd5.firebaseapp.com",
-    "databaseURL": "https://blendr-c1bd5.firebaseio.com",
-    "storageBucket": "blendr-c1bd5.appspot.com",
-    "projectId": "blendr-c1bd5",
-    "appId": "1:289396306071:web:fe685d0d1278f3c76df9d2"
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '',
+    }
 }
-
-firebase = pyrebase.initialize_app(firebaseConfig)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
