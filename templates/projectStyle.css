@@ -1,0 +1,82 @@
+ body{
+      background: url("https://www.avconnexions.com/wp-content/uploads/2015/03/Purposeless-Dating-1024x683.jpg");
+      background-size: cover;
+  
+      }
+      #signUpBox {
+        float: right;
+      border: solid gray 1px;
+      width: 500px;
+    height: 630px;
+    background-color:white;
+      border-radius: 10px;
+      margin-right: 60px;
+      margin-top:60px;
+      font-family: Calibri;
+	  font-weight:bold;
+      text-align: center
+		
+      }
+      #loginbox {
+        float: right;
+      border: solid gray 1px;
+      width: 500px;
+    height: 400px;
+    background-color:white;
+      border-radius: 10px;
+      margin-right: 60px;
+      margin-top:60px;
+      font-family: Calibri;
+	  font-weight:bold;
+      text-align: center
+		
+      }
+	  
+#mix{
+  font-size: 30pt;
+}
+	  #inputs{
+		  font-family: Calibri;
+      padding-top: 10px;
+      padding-bottom: 0px;
+		  transform-origin:114px;
+	  }
+
+	  input[type=text] {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transform-origin:114px;
+}
+	  input[type=password], select {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+      input[type=submit] {
+		background-color:black;
+		width: 150px;
+		border: none;
+		font-family: Calibri;
+		border-radius: 20px;
+		padding: 10px;
+		color: white;
+    font-size: 15pt;
+    margin : 10px;
+      }
+	  input[type=submit]:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+#forgotPassword{
+  color: black
+}
+      
