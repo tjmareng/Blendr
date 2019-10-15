@@ -17,5 +17,6 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.homepage, name="home"),
+    path('', views.index, name="index"),
+    path('login.html/', views.login, name="login"),
 ]
