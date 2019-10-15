@@ -5,11 +5,9 @@ from django.http import HttpResponse
 from Blendr.firebase_config import db
 
 
-def homepage(request):
-
-
+def login(request):
 
     # data = {"name": "testboy"}
     # db.child("test").push(data)
 
-    return HttpResponse("Hello")
+    return render(request, 'main/login.html')
