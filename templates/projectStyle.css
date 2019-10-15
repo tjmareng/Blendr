@@ -31,8 +31,28 @@
       text-align: center
 		
       }
-	  
-#mix{
+#bioTitle{
+  text-align: left;
+  padding-left: 62px;
+}
+      .profilePicture{
+        background: url(https://cdn3.iconfinder.com/data/icons/simple-outline/72/black-add-person-512.png);
+        height: 100;
+        width:100;
+        background-size: 100px 100px;
+        border:none;
+      }
+    
+      #genders{
+        display: inline-flex;
+
+      }
+      #sexuality{
+        display: inline-flex;
+      }
+
+
+      #mix{
   font-size: 30pt;
 }
 	  #inputs{

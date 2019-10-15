@@ -11,18 +11,43 @@
       
       <div id ="signUpBox">
             
-            <div id ="inputs">
-         
-            <input type="text" name="Name" placeholder="First Name"></input>
+      <div id ="inputs">
+  
+              <div id = profilePictures>
+                <input id="fileInput" type="file" style="display:none;" />
+                <input class= "profilePicture" type="button" value="" onclick="document.getElementById('fileInput').click();" />
+                <img id="myImg" src="">
+                </div>
+        
+            <div id= bioTitle>
+                Say something about yourself
+            </div>
+            <textarea name="paragraph_text" cols="50" rows="7" placeholder="Bio"></textarea>
             <br></br>
-            
+
+            <p>Gender</p>
+            <div id = "genders">
+             
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            </div>
+
+            <p><strong>Interested in</strong></p>
+
+            <div id = "sexuality">
+                <input type="radio" name="sexuality" value="Men"> Men<br>
+                <input type="radio" name="sexuality" value="Women"> Women<br>
+                </div>
+           
+
             </div>
             <form action="login.html">
                 <div id = "Login">
           
                 <input type="submit" name="login" value = "Blend!"></input>
+              </div>
             </form>
-                </div>
+                
 
       </div>
       
