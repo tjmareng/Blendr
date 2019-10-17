@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from Blendr.firebase_config import db, auth
 # from .models import User
+from main.models import User
 
 
 def index(request):
@@ -27,8 +28,8 @@ def signup(request):
         conf_password = request.POST.get('confirmPassword')
 
         if password == conf_password:
-            # user = User(email, name, password)
-            # db.child("users").push(user)
+            user = User(email, name, password)
+            db.child("users").push(usertodict(user))
             test_data = {"email": email, "name": name}
 
             db.child("users").push(test_data)
@@ -36,3 +37,8 @@ def signup(request):
 
             return render(request, 'main/profileCreation.html')
         # else: handle not matching error
+
+
+#Converts User object to a dictionary to be stored in DB
+def usertodict(self):
+    return{"name": self.name, "email": self.email, "passord": self.password}
