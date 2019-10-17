@@ -19,4 +19,8 @@ from django.urls import path
 urlpatterns = [
     path('', views.index, name="index"),
     path('login.html/', views.login, name="login"),
+    path('profileCreation.html/', views.signup, name="signup"),
+
+    # THIS IS A TEMPORARY SOLUTION
+    path('profileCreation.html/login.html/', views.login, name="login")
 ]

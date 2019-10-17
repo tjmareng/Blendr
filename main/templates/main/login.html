@@ -1,46 +1,41 @@
 {% load static %}
 
 <html>
-    <head>
+<head>
 
-      <title>Login Page</title>
-      <link rel="stylesheet" type="text/css" href="{% static 'css/projectStyle.css' %}"></link>
-      
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/projectStyle.css' %}"/>
 
-    </head>
-   
-    <body>
-      <div id = "logo">
-        <img src="./logo.png" height="200" width="400">
-      </div>
-      <div id ="loginbox">
-            <div id ="mix">
-                    <p>Let's Mix!</p>
-                  </div>
-        <div id ="inputs">
-         
-            
-            <input type="text" name="Email" placeholder="Email"></input>
-            <br></br>
-            <input type="password" name="Password" placeholder="Password"></input>
-            <br></br>
-            
-        
-        </div>
-       
-        
-        <div id = "login">
-          
-                <input type="submit" name="login" value = "Login"></input>
-              </form>
-            </div>
+</head>
 
+<body>
+<div id = "logo">
+    <img src="../../static/images/logo.png" height="200" width="400">
+</div>
+<div id ="loginbox">
+    <div id ="mix">
+        <p>Let's Mix!</p>
+    </div>
+    <div id ="inputs">
 
-            <div id = "forgotPassword">
-                    <p>Forgot Password?</p>
-                </div>
-      </div>
-      
-      
-        </body>
+        <input type="text" name="Email" placeholder="Email"/>
+        <br/>
+        <input type="password" name="Password" placeholder="Password"/>
+        <br/>
+
+    </div>
+
+    <div id = "login">
+        <form>
+        <input type="submit" name="login" value = "Login"/>
+        </form>
+    </div>
+
+    <div id = "forgotPassword">
+        <p>Forgot Password?</p>
+    </div>
+
+</div>
+
+</body>
 </html>
