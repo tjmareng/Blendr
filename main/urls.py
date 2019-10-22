@@ -17,10 +17,10 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.index, name="index"),
-    path('login.html/', views.login, name="login"),
-    path('profileCreation.html/', views.signup, name="signup"),
+    path('', views.goto_index, name="index"),
+    path('login.html/', views.goto_login, name="login"),
+    path('profileCreation.html/', views.goto_profile_creation, name="signup"),
 
     # THIS IS A TEMPORARY SOLUTION
-    path('profileCreation.html/login.html/', views.login, name="login")
+    path('profileCreation.html/login.html/', views.goto_login, name="login")
 ]
