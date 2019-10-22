@@ -35,7 +35,7 @@ def goto_complete_registration(request):
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')
 
-        new_user = User(email, username)
+        new_user = User(email, username, biography, sexuality, gender)
         db.child("users").child(email).set(user_to_dict(new_user))
 
     return render(request, '')
@@ -47,7 +47,9 @@ def reset_password(request):
 
 # Converts User object to a dictionary to be stored in DB
 def user_to_dict(self):
-    return {"name": self.username, "email": self.email, }
+    return {"email": self.email, "name": self.username,
+            "biography": self.biography, "sexuality": self.iso,
+            "gender": self.gender, }
 
 
 def clean_email(email):
