@@ -48,3 +48,11 @@ def reset_password(request):
 # Converts User object to a dictionary to be stored in DB
 def user_to_dict(self):
     return {"name": self.username, "email": self.email, }
+
+
+def clean_email(email):
+    cleaned_email = ""
+    for i in email:
+        if i != '@' and i != '.':
+            cleaned_email += i
+    return cleaned_email
