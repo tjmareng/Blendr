@@ -15,18 +15,20 @@
 
 <div id ="signUpBox">
 
-    <div id ="inputs">
+    <form action="login.html/", method="POST">
+        {% csrf_token %}
 
-        <div id = profilePictures>
-            <input id="fileInput" type="file" style="display:none;" />
-            <input class= "profilePicture" type="button" value="" onclick="document.getElementById('fileInput').click();" />
-            <img id="myImg" src="">
-        </div>
+        <div id ="inputs">
+            <div id = profilePictures>
+                <input id="fileInput" type="file" style="display:none;" />
+                <input class= "profilePicture" type="button" value="" onclick="document.getElementById('fileInput').click();" />
+                <img id="myImg" src="">
+            </div>
 
         <div id= bioTitle>
             Say something about yourself
         </div>
-        <textarea name="paragraph_text" cols="50" rows="7" placeholder="Bio"></textarea>
+        <textarea name="biography" cols="50" rows="7" placeholder="Bio"></textarea>
         <br/>
 
         <p>Gender</p>
@@ -44,13 +46,11 @@
         </div>
 
     </div>
-    <form action="login.html/", method="POST">
-        {% csrf_token %}
-        <div id = "Login">
-            <input type="submit" name="login" value = "Blend!"/>
-        </div>
-    </form>
+    <div id = "Complete Registration">
+        <input type="submit" name="complete_registration" value = "Blend!"/>
+    </div>
 
+    </form>
 
 </div>
 

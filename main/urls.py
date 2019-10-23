@@ -22,5 +22,5 @@ urlpatterns = [
     path('profileCreation.html/', views.goto_profile_creation, name="signup"),
 
     # THIS IS A TEMPORARY SOLUTION
-    path('profileCreation.html/login.html/', views.goto_login, name="login")
+    path('profileCreation.html/login.html/', views.goto_complete_registration, name="login")
 ]
