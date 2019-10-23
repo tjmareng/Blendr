@@ -5,13 +5,16 @@
       }
 
       #logo{
-        float: center;
+          padding-top: 20px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
       }
       #signUpBox {
         float: right;
       border: solid gray 1px;
       width: 500px;
-    height: 630px;
+    height: 550px;
     background-color:white;
       border-radius: 10px;
       margin-right: 60px;
@@ -32,7 +35,7 @@
       margin-top:60px;
       font-family: Calibri;
 	  font-weight:bold;
-      text-align: center
+      text-align: center;
 		
       }
 #bioTitle{
@@ -100,7 +103,75 @@
   background-color: rgb(100, 100, 100);
 }
 
-#forgotPassword{
-  color: black
+.open-button {
+  background-color: white;
+  color: black;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
 }
-      
+.open-button:focus{
+    outline: none;
+}
+/* The popup form - hidden by default */
+  .form-popup {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 150px;
+  z-index: 9;
+}
+
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+    border: solid gray 1px;
+    border-radius: 10px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color:black;
+		width: 150px;
+		border: none;
+		font-family: Calibri;
+		border-radius: 20px;
+		padding: 10px;
+		color: white;
+    font-size: 15pt;
+    margin : 10px;
+}
+
+.form-container .btn:hover{
+    background-color: rgb(100, 100, 100);
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+

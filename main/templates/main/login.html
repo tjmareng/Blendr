@@ -9,13 +9,12 @@
 </head>
 
 <body>
-<div id = "logo">
-    <img src="../../static/images/logo.png" height="200" width="400">
-</div>
+
 <div id ="loginbox">
-    <div id ="mix">
-        <p>Let's Mix!</p>
-    </div>
+
+    <div id = "logo">
+    <img src="../../static/images/logo.png"height="100" width="300">
+</div>
     <div id ="inputs">
 
         <input type="text" name="Email" placeholder="Email"/>
@@ -31,9 +30,22 @@
         </form>
     </div>
 
-    <div id = "forgotPassword">
-        <p>Forgot Password?</p>
-    </div>
+    <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
+
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+      <label for="email"><b>Enter your email to reset your password.</b></label>
+    <input type="text" placeholder="example@test.com" name="email" required>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+</script>
+
 
 </div>
 
