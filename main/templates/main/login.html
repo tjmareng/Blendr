@@ -13,34 +13,37 @@
 <div id ="loginbox">
 
     <div id = "logo">
-    <img src="../../static/images/logo.png"height="100" width="300">
-</div>
-    <div id ="inputs">
-
-        <input type="text" name="Email" placeholder="Email"/>
-        <br/>
-        <input type="password" name="Password" placeholder="Password"/>
-        <br/>
-
+        <img src="../../static/images/logo.png"height="100" width="300">
     </div>
+    <form action="homepage.html/" method="POST">
+        {% csrf_token %}
+        <div id ="inputs">
 
-    <div id = "login">
-        <form>
-        <input type="submit" name="login" value = "Login"/>
-        </form>
-    </div>
+            <input type="text" name="Email" placeholder="Email"/>
+            <br/>
+            <input type="password" name="Password" placeholder="Password"/>
+            <br/>
 
-    <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
+        </div>
 
-<div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
-      <label for="email"><b>Enter your email to reset your password.</b></label>
-    <input type="text" placeholder="example@test.com" name="email" required>
-    <button type="submit" class="btn">Submit</button>
-  </form>
-</div>
+        <div id = "login">
+            <form>
+                <input type="submit" name="login" value = "Login"/>
+            </form>
+        </div>
 
-<script>
+        <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
+
+        <div class="form-popup" id="myForm">
+            <form action= "login.html/" class="form-container" method="POST">
+                {% csrf_token %}
+                <label><b>Enter your email to reset your password.</b></label>
+                <input type="text" placeholder="example@test.com" name="email" required>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+
+        <script>
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }

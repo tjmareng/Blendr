@@ -47,8 +47,16 @@ def goto_complete_registration(request):
     return render(request, 'main/login.html')
 
 
+def goto_homepage(request):
+    return render(request, "main/homepage.html")
+
+
 def reset_password(request):
-    return request(request, '')
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        print(email)
+        auth.send_password_reset_email(email)
+    return render(request, 'main/login.html')
 
 
 def clean_email(email):
