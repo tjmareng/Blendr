@@ -1,5 +1,8 @@
+
 body{
     margin: 0;
+     background: url("https://wallpaperaccess.com/full/2154.jpg");
+    background-size: cover;
 }
 
 #navBar{
@@ -57,6 +60,6 @@ transform: scale(1.2);
 .messages_button:hover{
 transform: scale(1.2);
 }
-.friends_button:hover{
-transform: scale(1.2);
+.friends_button:hover {
+    transform: scale(1.2);
 }
