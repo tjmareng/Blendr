@@ -12,7 +12,7 @@
 
 <div id ="signUpBox">
 
-    <form action="login.html/", method="POST">
+    <form action={% url 'email_verification'%}, method="POST">
         {% csrf_token %}
 
         <div id ="inputs">

@@ -15,7 +15,7 @@
     <div id = "logo">
         <img src="../../static/images/logo.png"height="100" width="300">
     </div>
-    <form action="homepage.html/" method="POST">
+    <form action={% url 'homepage'} method="POST">
         {% csrf_token %}
         <div id ="inputs">
 
@@ -35,7 +35,7 @@
         <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
 
         <div class="form-popup" id="myForm">
-            <form action= "login.html/" class="form-container" method="POST">
+            <form action={% url 'login'%} class="form-container" method="POST">
                 {% csrf_token %}
                 <label><b>Enter your email to reset your password.</b></label>
                 <input type="text" placeholder="example@test.com" name="email" required>

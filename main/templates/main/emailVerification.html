@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +12,7 @@
 <body>
 <div id="signUpBox">
     An email verification has been sent
-    <form action="login.html">
+    <form action={% url 'login'%}>
         <div id = "Login">
             <input type="submit" name="login" value = "Login"/>
         </div>

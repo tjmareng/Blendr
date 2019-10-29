@@ -16,7 +16,7 @@
     <img src="../../static/images/logo.png"height="100" width="300">
 </div>
 
-    <form action="profileCreation.html/" method="POST">
+    <form action={% url 'signup'%} method="POST">
         {% csrf_token %}
         <div id ="inputs">
             <input type="text" name="Username" placeholder="Username"/>
@@ -32,8 +32,8 @@
         <input type="submit" name="signUP" value = "Sign Up"/>
     </form>
 
-    <form action="login.html">
-        <div id = "Login">
+    <form action= {% url 'login' %}>
+        <div id = "login">
             <input type="submit" name="login" value = "Login"/>
         </div>
     </form>
