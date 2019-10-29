@@ -21,8 +21,9 @@ from django.urls import path
 urlpatterns = [
     path('', views.goto_index, name="index"),
     url('login.html/', views.goto_login, name="login"),
-    url('profileCreation.html', views.goto_profile_creation, name="signup"),
-    url('homepage.html', views.goto_homepage, name="homepage"),
-    url('emailVerification.html', views.goto_complete_registration, name="email_verification"),
-    url('login.html', views.reset_password, name="reset_password"),
+    url('profileCreation.html/', views.goto_profile_creation, name="signup"),
+    url('homepage.html/', views.verify_login_credentials, name="verify_login_credentials"),
+    url('homepage.html/', views.goto_homepage, name="homepage"),
+    url('emailVerification.html/', views.goto_complete_registration, name="email_verification"),
+    url('login.html/', views.reset_password, name="reset_password"),
 ]

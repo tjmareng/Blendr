@@ -36,12 +36,16 @@ def goto_complete_registration(request):
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
+
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')
+        birthday = request.POST.get('birthday')
+
+        # TODO add logic for handling age checking
 
         new_user = {'email': email, 'username': username, 'biography': biography,
-                    'sexuality': sexuality, 'gender': gender, }
+                    'sexuality': sexuality, 'gender': gender, 'birthday': birthday}
         db.child("users").child(clean_email(email)).set(new_user)
 
         user = auth.create_user_with_email_and_password(email, password)
@@ -68,3 +72,18 @@ def clean_email(email):
         if i != '@' and i != '.':
             cleaned_email += i
     return cleaned_email
+
+
+def verify_login_credentials(request):
+    if request.method == 'POST':
+        email = request.POST.get('Email')
+        password = request.POST.get('Password')
+        user = auth.sign_in_with_email_and_password(email, password)
+
+        # TODO handle incorrect login credential handling
+
+        return goto_homepage(request)
+
+
+
+

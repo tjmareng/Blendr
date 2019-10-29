@@ -15,7 +15,7 @@
     <div id = "logo">
         <img src="../../static/images/logo.png"height="100" width="300">
     </div>
-    <form action={% url 'homepage'} method="POST">
+    <form action={% url 'verify_login_credentials' %} method="POST">
         {% csrf_token %}
         <div id ="inputs">
 
@@ -27,10 +27,10 @@
         </div>
 
         <div id = "login">
-            <form>
-                <input type="submit" name="login" value = "Login"/>
-            </form>
+            <input type="submit" name="login" value = "Login"/>
         </div>
+
+    </form>
 
         <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
 
