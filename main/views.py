@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 
 from Blendr.firebase_config import db, auth
-from main.models import User
+from main.models import UserCard
 
 
 def goto_index(request):
@@ -56,7 +56,13 @@ def goto_complete_registration(request):
 
 
 def goto_homepage(request):
-    return render(request, "main/homepage.html")
+
+    # create users based on the database
+
+    results = db.child("users").get()
+    for key in results.val():
+        username = results.val()[key]["username"]
+    return render(request, "main/homepage.html",)
 
 
 def reset_password(request):

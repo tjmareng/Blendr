@@ -2,14 +2,13 @@ from django.db import models
 
 
 # Create your models here.
-class User(models.Model):
-    email = models.CharField(max_length=50)
-    # models.EmailField()
+class UserCard(models.Model):
     username = models.CharField(max_length=50)
+    birthday = models.CharField(max_length=10)
     biography = models.TextField()
     gender = models.CharField(max_length=6)
     iso = models.CharField(max_length=6)
+    email = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.email + ',' + self.username + ',' + self.biography + ',' + self.gender + ',' + self.iso
-
+        return self.email + ',' + self.username + ',' + self.biography + ',' + self.gender + ',' + self.iso + ',' + self.birthday
