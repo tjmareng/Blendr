@@ -60,8 +60,8 @@ def goto_homepage(request):
     # create users based on the database
 
     results = db.child("users").get()
-    for key in results.val():
-        username = results.val()[key]["username"]
+    #for key in results.val():
+        #username = results.val()[key]["username"]
     return render(request, "main/homepage.html",)
 
 
