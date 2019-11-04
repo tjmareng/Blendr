@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-
+from django.template import Context
 from Blendr.firebase_config import db, auth
 from main.models import UserCard
 
@@ -58,11 +58,20 @@ def goto_complete_registration(request):
 def goto_homepage(request):
 
     # create users based on the database
-
+    context_dict = {}
     results = db.child("users").get()
     for key in results.val():
         username = results.val()[key]["username"]
-    return render(request, "main/homepage.html",)
+        bio = results.val()[key]["biography"]
+        birthday = results.val()[key]["birthday"]
+        gender = results.val()[key]["gender"]
+        sexuality = results.val()[key]["sexuality"]
+        email = results.val()[key]["email"]
+        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality, email=email)
+        context_dict[email] = new_user_card
+        print(context_dict[email])
+    return render(request, "main/homepage.html", context={"UserCards": context_dict})
+
 
 
 def reset_password(request):
@@ -85,6 +94,7 @@ def verify_login_credentials(request):
         email = request.POST.get('Email')
         password = request.POST.get('Password')
         user = auth.sign_in_with_email_and_password(email, password)
+
 
         # TODO handle incorrect login credential handling
 
