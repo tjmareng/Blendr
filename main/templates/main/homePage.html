@@ -3,15 +3,15 @@
 {% load static %}
 
 <html lang="en">
-{% comment %}<head>
+<head>
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/mainPagesStyle.css' %}">
 <!--<link rel="stylesheet" type="text/css" href='C:\Users\liamr\Desktop\Blendr\main\static\css\mainPagesStyle.css'>-->
 
 </head>
-<body>{% endcomment %}
-{% comment %}<div id="navBar">
+<body>
+<div id="navBar">
 
     <div id="navLogo">
 
@@ -19,7 +19,9 @@
     </div>
 
     <div id="friendsIcon">
-        <input class= "friends_button" type="button" value="">
+        <form action={% url 'friends'%}>
+            <input class= "friends_button" type="button" value="">
+        </form>
     </div>
     <div id="messagesIcon">
         <input class= "messages_button" type="button" value="">
@@ -29,7 +31,7 @@
     </div>
 
 
-</div>{% endcomment %}
+</div>
 <div>
     {% for usercard in Users %}
         <p>{{ usercard.username }}</p>

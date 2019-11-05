@@ -26,5 +26,5 @@ urlpatterns = [
     url('homepage.html/', views.goto_homepage, name="homepage"),
     url('emailVerification.html/', views.goto_complete_registration, name="email_verification"),
     url('login.html/', views.reset_password, name="reset_password"),
-    url('FriendsPg', views.goto_friends_page, name="friends_page"),
+    url('FriendsPg.html/', views.goto_friends_page, name="friends"),
 ]
