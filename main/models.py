@@ -12,4 +12,6 @@ class UserCard(models.Model):
     age = models.CharField(max_length=5)
 
     def __str__(self):
-        return self.email + ',' + self.username + ',' + self.biography + ',' + self.gender + ',' + self.iso + ',' + self.birthday
+        return self.email + ',' + self.username + ',' + self.biography + ','\
+               + self.gender + ',' + self.iso + ',' + self.birthday + ', '\
+               + self.age + ','
