@@ -9,6 +9,7 @@ class UserCard(models.Model):
     gender = models.CharField(max_length=6)
     iso = models.CharField(max_length=6)
     email = models.CharField(max_length=50)
+    age = models.CharField(max_length=5)
 
     def __str__(self):
         return self.email + ',' + self.username + ',' + self.biography + ',' + self.gender + ',' + self.iso + ',' + self.birthday
