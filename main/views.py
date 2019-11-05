@@ -2,7 +2,9 @@ from datetime import date, datetime
 
 from django.shortcuts import render, render_to_response
 from django.template import Context
-from Blendr.firebase_config import db, auth
+from requests import HTTPError
+
+from Blendr.firebase_config import db, auth, pyrebase
 from main.models import UserCard
 
 
@@ -116,6 +118,7 @@ def verify_login_credentials(request):
 
         return goto_homepage(request)
 
-
+def goto_friends_page(request):
+    return render(request, 'main/FriendsPg.html')
 
 
