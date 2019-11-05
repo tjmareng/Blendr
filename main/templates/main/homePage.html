@@ -3,15 +3,15 @@
 {% load static %}
 
 <html lang="en">
-<head>
+{% comment %}<head>
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/mainPagesStyle.css' %}">
 <!--<link rel="stylesheet" type="text/css" href='C:\Users\liamr\Desktop\Blendr\main\static\css\mainPagesStyle.css'>-->
 
 </head>
-<body>
-<div id="navBar">
+<body>{% endcomment %}
+{% comment %}<div id="navBar">
 
     <div id="navLogo">
 
@@ -29,7 +29,11 @@
     </div>
 
 
+</div>{% endcomment %}
+<div>
+    {% for usercard in Users %}
+        <p>{{ usercard.username }}</p>
+    {% endfor %}
 </div>
-
 </body>
 </html>

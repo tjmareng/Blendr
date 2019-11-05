@@ -58,7 +58,7 @@ def goto_complete_registration(request):
 def goto_homepage(request):
 
     # create users based on the database
-    context_dict = {}
+    user_card_list = []
     results = db.child("users").get()
     for key in results.val():
         username = results.val()[key]["username"]
@@ -68,9 +68,10 @@ def goto_homepage(request):
         sexuality = results.val()[key]["sexuality"]
         email = results.val()[key]["email"]
         new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality, email=email)
-        context_dict[email] = new_user_card
-        print(context_dict[email])
-    return render(request, "main/homepage.html", context={"UserCards": context_dict})
+        user_card_list.append(new_user_card)
+        # context_dict.update({username : new_user_card})
+    context_dict = {"Users" : user_card_list}
+    return render(request, "main/homepage.html", context=context_dict)
 
 
 

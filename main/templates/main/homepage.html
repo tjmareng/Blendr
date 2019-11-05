@@ -31,10 +31,8 @@
 
 </div>{% endcomment %}
 <div>
-    {% for User in UserCards %}
-        {% for item in User %}
-            <p>{{ item }}</p>
-        {% endfor %}
+    {% for usercard in Users %}
+        <p>{{ usercard.username }}</p>
     {% endfor %}
 </div>
 </body>
