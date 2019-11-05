@@ -118,6 +118,7 @@ def verify_login_credentials(request):
 
         return goto_homepage(request)
 
+
 def goto_friends_page(request):
     return render(request, 'main/FriendsPg.html')
 
