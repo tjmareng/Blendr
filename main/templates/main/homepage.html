@@ -14,22 +14,23 @@
 <div id="navBar">
 
     <div id="navLogo">
-
-            <img src="../../static/images/logo_white.png"height="75" width="200">
+        <img src="../../static/images/logo_white.png"height="75" width="200">
     </div>
 
     <div id="friendsIcon">
-        <form action={% url 'friends'%}>
-            <input class= "friends_button" type="button" value="">
+        <form action={% url 'friends'%} method="POST">
+            {% csrf_token %}
+            <input class= "friends_button" type="submit" value="">
         </form>
     </div>
+
     <div id="messagesIcon">
         <input class= "messages_button" type="button" value="">
     </div>
+
     <div id="accountIcon">
         <input class= "account_button" type="button" value="">
     </div>
-
 
 </div>
 <div>

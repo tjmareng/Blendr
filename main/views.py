@@ -120,6 +120,6 @@ def verify_login_credentials(request):
 
 
 def goto_friends_page(request):
-    return render(request, 'main/FriendsPg.html')
+    return render(request, 'main/friends.html')
 
 
