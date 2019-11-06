@@ -1,3 +1,5 @@
+from builtins import int, ValueError, len
+
 from datetime import date, datetime
 
 from django.shortcuts import render, render_to_response
@@ -45,6 +47,7 @@ def goto_profile_creation(request):
 def goto_complete_registration(request):
     if request.method == 'POST':
         # after finishing registration
+        friends_list = []
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
@@ -59,7 +62,7 @@ def goto_complete_registration(request):
             # upload user to database
             new_user = {'email': email, 'username': username, 'biography': biography,
                         'sexuality': sexuality, 'gender': gender, 'birthday': birthday,
-                        'age': age, }
+                        'age': age, 'friends': friends_list}
             db.child("users").child(clean_email(email)).set(new_user)
 
             # authentication process
