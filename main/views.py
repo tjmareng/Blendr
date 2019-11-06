@@ -92,7 +92,8 @@ def goto_homepage(request):
         gender = results.val()[key]["gender"]
         sexuality = results.val()[key]["sexuality"]
         email = results.val()[key]["email"]
-        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality, email=email)
+        age = results.val()[key]["age"]
+        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality, email=email, age=age)
         user_card_list.append(new_user_card)
     context_dict = {"Users" : user_card_list}
     return render(request, "main/homepage.html", context=context_dict)
