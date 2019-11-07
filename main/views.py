@@ -119,8 +119,10 @@ def verify_login_credentials(request):
     if request.method == 'POST':
         email = request.POST.get('Email')
         password = request.POST.get('Password')
+        # try:
         user = auth.sign_in_with_email_and_password(email, password)
-
+        # except HTTPError:
+            # print("WRONG!")
         return goto_homepage(request)
 
 
