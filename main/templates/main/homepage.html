@@ -14,7 +14,8 @@
 <div id="navBar">
 
     <div id="navLogo">
-        <img src="../../static/images/logo_white.png"height="75" width="200">
+
+            <img src="../../static/images/logo_white.png"height="75" width="200">
     </div>
 
     <div id="friendsIcon">
@@ -32,5 +33,42 @@
         <input class= "account_button" type="button" value="">
     </div>
 </div>
+
+    <div id = top_buttons>
+
+
+            <button class="open-button" onclick="openForm()">Filters</button>
+
+                <div class="form-popup" id="myForm">
+            <form action={% url 'login'%} class="form-container" method="POST">
+                {% csrf_token %}
+                <div class="slidecontainer">
+                <p>Age Range</p>
+                    <div id="textInput" value="">
+                  <input type="range" min="21" max="100" value="50" class="slider" id="ageRange">
+                <p>Maximum Distance</p>
+                  <input type="range" min="1" max="100" value="50" class="slider" id="distanceRange">
+                </div>
+                <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+
+
+        <script>
+            function openForm() {
+             document.getElementById("myForm").style.display = "block";
+        }
+        </script>
+    </div>
+    </div>
+<div id = "userDisplay">
+    {% for usercard in Users %}
+        <div id = "userCard">
+        <p>{{ usercard.username }}</p>
+        </div>
+
+    {% endfor %}
+</div>
+
 </body>
 </html>
