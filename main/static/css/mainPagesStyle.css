@@ -179,8 +179,9 @@ transform: scale(1.2);
   cursor: pointer;
 }
 #userCard{
-    width: 100px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     background-color: white;
     display: inline-block;
+    margin: 40px;
 }
