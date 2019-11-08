@@ -17,128 +17,142 @@
 
         <div id ="inputs">
             <div id = profilePictures>
-                <input id="fileInput" type="file" style="display:none;" />
-                <input class= "profilePicture" type="button" value="" onclick="document.getElementById('fileInput').click();" />
-                <img id="myImg" src="">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script type="text/javascript">
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                $('#blah').attr('src', e.target.result).width(200).height(150)
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                </script>
+
+                <input type='file' id="imgInp" onchange="readURL(this)"  />
+                <img id="blah" src="#" alt="your image" />
             </div>
 
-        <div id= bioTitle>
-            Say something about yourself:
+            <div id= bioTitle>
+                Say something about yourself:
+            </div>
+            <textarea name="biography" cols="50" rows="7" placeholder="Bio"></textarea>
+            <br/>
+            <style>
+                /* The container */
+                .container {
+                    display: inline-block;
+                    position: relative;
+                    padding-left: 25px;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    font-size: 15px;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                /* Hide the browser's default radio button */
+                .container input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                /* Create a custom radio button */
+                .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 20px;
+                    width: 20px;
+                    background-color: #eee;
+                    border-radius: 50%;
+                }
+
+                /* On mouse-over, add a grey background color */
+                .container:hover input ~ .checkmark {
+                    background-color: #ccc;
+                }
+
+                /* When the radio button is checked, add a blue background */
+                .container input:checked ~ .checkmark {
+                    background-color: #000000;
+                }
+
+                /* Create the indicator (the dot/circle - hidden when not checked) */
+                .checkmark:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                }
+
+                /* Show the indicator (dot/circle) when checked */
+                .container input:checked ~ .checkmark:after {
+                    display: block;
+                }
+
+                /* Style the indicator (dot/circle) */
+                .container .checkmark:after {
+                    top: 9px;
+                    left: 9px;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: none;
+                }
+            </style>
+
+            <p><strong>Gender:</strong></p>
+            <div id = "genders">
+
+                <label class="container">Male
+                    <input type="radio" name="gender" value="male" >
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Female
+                    <input type="radio" name="gender" value="female">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+
+            </div>
+
+
+            <p><strong>Interested in:</strong></p>
+
+            <div id = "sexuality">
+
+                <label class="container">Male
+                    <input type="radio" name="sexuality" value="male" >
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Female
+                    <input type="radio" name="sexuality" value="female">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+            </div>
+
+            <p><strong>Birth Date:</strong></p>
+            <div id = birthday">
+                <input type="date" name="birthday">
+
+            </div>
+
+
         </div>
-        <textarea name="biography" cols="50" rows="7" placeholder="Bio"></textarea>
-        <br/>
-<style>
-/* The container */
-    .container {
-      display: inline-block;
-      position: relative;
-      padding-left: 25px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      font-size: 15px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    /* Hide the browser's default radio button */
-    .container input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    /* Create a custom radio button */
-    .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 20px;
-      width: 20px;
-      background-color: #eee;
-      border-radius: 50%;
-    }
-
-    /* On mouse-over, add a grey background color */
-    .container:hover input ~ .checkmark {
-      background-color: #ccc;
-    }
-
-    /* When the radio button is checked, add a blue background */
-    .container input:checked ~ .checkmark {
-      background-color: #000000;
-    }
-
-    /* Create the indicator (the dot/circle - hidden when not checked) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-
-        /* Show the indicator (dot/circle) when checked */
-        .container input:checked ~ .checkmark:after {
-          display: block;
-        }
-
-        /* Style the indicator (dot/circle) */
-        .container .checkmark:after {
-            top: 9px;
-            left: 9px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: none;
-        }
-        </style>
-
-        <p><strong>Gender:</strong></p>
-        <div id = "genders">
-
-        <label class="container">Male
-              <input type="radio" name="gender" value="male" >
-              <span class="checkmark"></span>
-        </label>
-        <label class="container">Female
-            <input type="radio" name="gender" value="female">
-      <span class="checkmark"></span>
-    </label>
-
-
-
-
+        <div id = "Complete Registration">
+            <input type="submit" name="complete_registration" value = "Blend!"/>
         </div>
-
-
-        <p><strong>Interested in:</strong></p>
-
-        <div id = "sexuality">
-
-    <label class="container">Male
-         <input type="radio" name="sexuality" value="male" >
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">Female
-        <input type="radio" name="sexuality" value="female">
-        <span class="checkmark"></span>
-    </label>
-
-
-
-        </div>
-
-        <p><strong>Birth Date:</strong></p>
-        <div id = birthday">
-            <input type="date" name="birthday">
-
-        </div>
-
-
-    </div>
-    <div id = "Complete Registration">
-        <input type="submit" name="complete_registration" value = "Blend!"/>
-    </div>
 
     </form>
 
