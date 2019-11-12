@@ -27,4 +27,5 @@ urlpatterns = [
     url('emailVerification.html/', views.goto_complete_registration, name="email_verification"),
     url('login.html/', views.reset_password, name="reset_password"),
     url('friends.html/', views.goto_friends_page, name="friends"),
+    url('ViewProfile.html/', views.goto_edit_profile, name="account"),
 ]
