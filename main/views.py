@@ -6,7 +6,7 @@ from django.shortcuts import render, render_to_response
 from django.template import Context
 from requests import HTTPError
 
-from Blendr.firebase_config import db, auth, pyrebase
+from Blendr.firebase_config import db, auth, pyrebase, storage
 from main.models import UserCard
 
 
@@ -51,8 +51,8 @@ def goto_complete_registration(request):
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
-        photo = request.POST.get('myImg')
-        print(photo)
+        # photo = request.POST.get('blah')
+        # storage.child("Pics").put(photo)
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')
@@ -115,12 +115,31 @@ def clean_email(email):
     return cleaned_email
 
 
+def user_info(user_token):
+    account_info = auth.get_account_info(user_token)
+    key = clean_email(account_info['users'][0]['email'])
+    card_info = db.child("users").get()
+    username = card_info.val()[key]['username']
+    age = card_info.val()[key]['age']
+    biography = card_info.val()[key]['biography']
+    sexuality = card_info.val()[key]['sexuality']
+    gender = card_info.val()[key]['gender']
+    birthday = card_info.val()[key]['birthday']
+    email = card_info.val()[key]['email']
+    info_dict = {'username': username, "age": age, "biography": biography, "sexuality": sexuality, "gender": gender, "birthday": birthday, "email": email}
+    return info_dict
+
+
 def verify_login_credentials(request):
     if request.method == 'POST':
         email = request.POST.get('Email')
         password = request.POST.get('Password')
         # try:
+        # sign_in_with_email_and_password returns user data with an "idToken"
         user = auth.sign_in_with_email_and_password(email, password)
+        # response = render(request, 'main/login.html')
+        # response.set_cookie('user_id_token', user['idToken'], max_age=None)
+        user_info(user['idToken'])
         # except HTTPError:
             # print("WRONG!")
         return goto_homepage(request)
@@ -129,4 +148,5 @@ def verify_login_credentials(request):
 def goto_friends_page(request):
     return render(request, 'main/friends.html')
 
-
+def goto_edit_profile(request):
+    return render(request, 'main/ViewProfile.html')
