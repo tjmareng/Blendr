@@ -84,7 +84,7 @@ transform: scale(1.2);
   display: none;
   position: fixed;
   bottom: 350px;
-  right: 75px;
+  right: 5px;
   z-index: 9;
 }
 
@@ -179,9 +179,24 @@ transform: scale(1.2);
   cursor: pointer;
 }
 #userCard{
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     background-color: white;
     display: inline-block;
-    margin: 40px;
+    margin: 70px;
+    font-family: Calibri;
+    border: solid gray 1px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+#nameAge{
+    display: flex;
+}
+#profilePicture{
+    height: 225px;
+    width: 350px;
+    background-color: grey;
+    border-radius: 9px;
+
 }

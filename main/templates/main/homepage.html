@@ -64,7 +64,16 @@
 <div id = "userDisplay">
     {% for usercard in Users %}
         <div id = "userCard">
-        <p>{{ usercard.username }}</p>
+            <div id = "profilePicture">
+
+            </div>
+            <div id = "nameAge">
+                <p>{{ usercard.username }} &nbsp </p>
+                <p>{{ usercard.age }}</p>
+                <img id = "like" src="../../static/images/ezgif.com-crop.gif" width="50" height="50">
+            </div>
+            <p>{{ usercard.biography }}</p>
+
         </div>
 
     {% endfor %}

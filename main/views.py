@@ -51,8 +51,12 @@ def goto_complete_registration(request):
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
+<<<<<<< Updated upstream
         # photo = request.POST.get('blah')
         # storage.child("Pics").put(photo)
+=======
+        photo = request.POST.get('myImg')
+>>>>>>> Stashed changes
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')
