@@ -51,12 +51,10 @@ def goto_complete_registration(request):
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
-<<<<<<< Updated upstream
+
         # photo = request.POST.get('blah')
         # storage.child("Pics").put(photo)
-=======
         photo = request.POST.get('myImg')
->>>>>>> Stashed changes
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')
@@ -141,16 +139,16 @@ def verify_login_credentials(request):
         # try:
         # sign_in_with_email_and_password returns user data with an "idToken"
         user = auth.sign_in_with_email_and_password(email, password)
-        # response = render(request, 'main/login.html')
-        # response.set_cookie('user_id_token', user['idToken'], max_age=None)
+        response = goto_homepage(request)
+        response.set_cookie('user_id_token', user['idToken'], max_age=None)
         user_info(user['idToken'])
         # except HTTPError:
             # print("WRONG!")
-        return goto_homepage(request)
+        return response
 
 
 def goto_friends_page(request):
     return render(request, 'main/friends.html')
 
 def goto_edit_profile(request):
-    return render(request, 'main/ViewProfile.html')
+    return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))

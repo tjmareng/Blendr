@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/mainPagesStyle.css' %}"/>
 </head>
 <body>
+
+{% csrf_token %}
+
 <div id="navBar">
 
     <div id="navLogo">
