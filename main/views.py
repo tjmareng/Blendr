@@ -52,9 +52,10 @@ def goto_complete_registration(request):
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
 
-        # photo = request.POST.get('blah')
-        # storage.child("Pics").put(photo)
-        photo = request.POST.get('myImg')
+        photo = request.POST.get('pic')
+        print(photo)
+        storage.child("Pics").put(photo)
+
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')
         gender = request.POST.get('gender')

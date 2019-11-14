@@ -1,16 +1,28 @@
+from builtins import range, classmethod
+
+import random
 from django.test import TestCase
-from .views import clean_email
+import string
+
+from Blendr.firebase_config import auth
+from .views import clean_email, user_info
 from selenium import webdriver
 import unittest
-import string
-import random
 
 
 # Create your tests here.
 class TestCases(unittest.TestCase):
-    #def test_email_cleaning(self):
-       # email = "lgrimaso@mtu.edu"
-        # self.assertEqual(clean_email(email), "lgrimasomtuedu")
+    def test_user_info(self):
+        user = auth.sign_in_with_email_and_password('lgrimaso@mtu.edu', 123123)
+        correct_dict = {"username": "Logan", "age": 22, "biography": "Just want the physical affection and personal connection with another human being.",
+                        "sexuality": "female", "gender": "male", "birthday": "1997-05-18", "email": "lgrimaso@mtu.edu"}
+        self.assertEqual(correct_dict, user_info(user['idToken']))
+
+
+    def test_email_cleaning(self):
+        email = "lgrimaso@mtu.edu"
+        self.assertEqual(clean_email(email), "lgrimasomtuedu")
+
 
     @classmethod
     def test_createUser(cls):
