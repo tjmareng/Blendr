@@ -32,6 +32,7 @@
     <div id="accountIcon">
         <input class= "account_button" type="submit" value="">
     </div>
+        </form>
 </div>
 
     <div id = top_buttons>
@@ -70,9 +71,16 @@
             <div id = "nameAge">
                 <p>{{ usercard.username }} &nbsp </p>
                 <p>{{ usercard.age }}</p>
-                <img id = "like" src="../../static/images/ezgif.com-crop.gif" width="50" height="50">
+
             </div>
-            <p>{{ usercard.biography }}</p>
+            <div id="bio">
+                <p>{{ usercard.biography }}</p>
+            </div>
+            <div id = "likeButton">
+                <input class= "like_button" type="submit" value="">
+            </div>
+
+
 
         </div>
 

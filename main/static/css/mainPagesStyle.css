@@ -75,6 +75,9 @@ transform: scale(1.2);
   border: none;
   cursor: pointer;
     float: right;
+    border-radius: 20px;
+    width: 195px;
+    margin-right: 5px;
 }
 .open-button:focus{
     outline: none;
@@ -82,7 +85,7 @@ transform: scale(1.2);
 /* The popup form - hidden by default */
   .form-popup {
   display: none;
-  position: fixed;
+  position: absolute;
   bottom: 350px;
   right: 5px;
   z-index: 9;
@@ -180,15 +183,16 @@ transform: scale(1.2);
 }
 #userCard{
     width: 350px;
-    height: 350px;
+    height: 400px;
     background-color: white;
-    display: inline-block;
+    float: left;
     margin: 70px;
     font-family: Calibri;
     border: solid gray 1px;
     border-radius: 10px;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    position: relative;
 }
 #nameAge{
     display: flex;
@@ -200,3 +204,29 @@ transform: scale(1.2);
     border-radius: 9px;
 
 }
+#bio {
+    padding: 5px 5px 5px 5px;
+    length:340px;
+    width: available;
+}
+
+#likeButton{
+
+    bottom: 0px;
+    right: 5px;
+
+}
+.like_button{
+    background: url("../../static/images/ezgif.com-crop.gif");
+
+    height: 50px;
+    width: 50px;
+    background-size: 50px 50px;
+    border:none;
+    position: absolute;
+    bottom: 2px;
+    right: 7px;
+    transition: all .1s ease-in-out;
+}
+
+
