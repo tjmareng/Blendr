@@ -10,8 +10,11 @@ class UserCard(models.Model):
     iso = models.CharField(max_length=6)
     email = models.CharField(max_length=50)
     age = models.CharField(max_length=5)
+    distance_from_current_user = models.CharField(max_length=50)
+    city = models.CharField(max_length=100)
+    coordinates = models.CharField(max_length=50)
 
     def __str__(self):
         return self.email + ',' + self.username + ',' + self.biography + ','\
                + self.gender + ',' + self.iso + ',' + self.birthday + ', '\
-               + self.age + ','
+               + self.age + ',' + self.distance_from_current_user + ',' + self.city + ',' + self.coordinates

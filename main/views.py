@@ -1,5 +1,5 @@
 from builtins import int, ValueError, len
-
+from django.contrib.gis.geoip2 import GeoIP2
 from datetime import date, datetime
 
 from django.shortcuts import render, render_to_response
@@ -61,12 +61,13 @@ def goto_complete_registration(request):
         gender = request.POST.get('gender')
         birthday = request.POST.get('birthday')
         age = calculate_age(birthday)
+        ip_address = get_client_ip_address(request)
 
         if age >= 21:
             # upload user to database
             new_user = {'email': email, 'username': username, 'biography': biography,
                         'sexuality': sexuality, 'gender': gender, 'birthday': birthday,
-                        'age': age, 'friends': friends_list}
+                        'age': age, 'friends': friends_list, 'ip_address': ip_address, }
             db.child("users").child(clean_email(email)).set(new_user)
 
             # authentication process
@@ -89,6 +90,9 @@ def goto_homepage(request):
     # create users based on the database
     user_card_list = []
     results = db.child("users").get()
+
+    # distance = get_distance
+
     for key in results.val():
         username = results.val()[key]["username"]
         bio = results.val()[key]["biography"]
@@ -97,9 +101,13 @@ def goto_homepage(request):
         sexuality = results.val()[key]["sexuality"]
         email = results.val()[key]["email"]
         age = results.val()[key]["age"]
-        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality, email=email, age=age)
+        city = get_city_from_ip_address(results.val()[key]["ip_address"])
+
+        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
+                                 email=email, age=age, city=city)
         user_card_list.append(new_user_card)
-    context_dict = {"Users" : user_card_list}
+    context_dict = {"Users": user_card_list}
+
     return render(request, "main/homepage.html", context=context_dict)
 
 
@@ -129,7 +137,9 @@ def user_info(user_token):
     gender = card_info.val()[key]['gender']
     birthday = card_info.val()[key]['birthday']
     email = card_info.val()[key]['email']
-    info_dict = {'username': username, "age": age, "biography": biography, "sexuality": sexuality, "gender": gender, "birthday": birthday, "email": email}
+    ip_address = card_info.val()[key]['ip_address']
+    info_dict = {'username': username, "age": age, "biography": biography, "sexuality": sexuality,
+                 "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address}
     return info_dict
 
 
@@ -150,6 +160,33 @@ def verify_login_credentials(request):
 
 def goto_friends_page(request):
     return render(request, 'main/friends.html')
+
+
+def get_client_ip_address(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip_address = x_forwarded_for.split(',')[0]
+    else:
+        ip_address = request.META.get('REMOTE_ADDR')
+    if ip_address == '127.0.0.1':
+        # assuming it is one of us, manually setting ip address to the school's external IP address
+        ip_address = '141.219.226.150'
+    return ip_address
+
+
+def get_city_from_ip_address(ip_address):
+    g = GeoIP2()
+    city = g.city(ip_address).get('city')
+    return city
+
+
+def get_distance_between_ip_addresses(ip1, ip2):
+    g = GeoIP2()
+    coordinates1 = g.lat_lon(ip1)
+    coordinates2 = g.lon_lat(ip2)
+    print(coordinates1 + ', ' + coordinates2)
+    # TODO implement distance calculation
+
 
 def goto_edit_profile(request):
     return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))

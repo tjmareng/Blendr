@@ -119,3 +119,5 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+GEOIP_PATH = os.path.join(SETTINGS_PATH, 'Blendr/GeoLite2-City.mmdb')
