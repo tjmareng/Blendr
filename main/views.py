@@ -221,6 +221,8 @@ def retrieve_database_users_friends_only(current_user_friends):
     context_dict = {"Users": user_card_list}
     return context_dict
 
-def update_friends(user_token, cl_email):
-    user_info(user_token)["friends"].append(cl_email)
-    return True
+
+def update_friends(request):
+    cleaned_email = clean_email(request.POST.get('like_button'))
+    print(cleaned_email)
+    user_info(request.COOKIES.get('user_id_token'))["friends"].append(cleaned_email)
