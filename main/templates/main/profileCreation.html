@@ -14,9 +14,9 @@
 
     <form action={% url 'email_verification'%}, method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-
         <div id ="inputs">
             <div id = profilePictures>
+{% comment %}
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <script type="text/javascript">
                     function readURL(input) {
@@ -31,9 +31,9 @@
                         }
                     }
                 </script>
+{% endcomment %}
 
-                <input type='file' id="imgInp" onchange="readURL(this)"  />
-                <img id="pic" src="#" alt="your image" />
+                <input type='file' id="imgInp" placeholder="Picture" name="picture"/>
             </div>
 
             <div id= bioTitle>

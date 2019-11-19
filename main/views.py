@@ -7,6 +7,7 @@ from django.template import Context
 from requests import HTTPError
 
 from Blendr.firebase_config import db, auth, pyrebase, storage
+from main.forms import UploadFileForm
 from main.models import UserCard
 
 
@@ -52,9 +53,17 @@ def goto_complete_registration(request):
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
 
-        photo = request.POST.get('pic')
-        print(photo)
-        storage.child("Pics").put(photo)
+        # photo = request.POST.get('pic')
+        # print(photo)
+        # storage.child("Pics").put(photo)
+        #
+        # form = UploadFileForm(request.POST, request.FILES)
+        # if form.is_valid():
+        #     UserCard.picture = UploadFileForm.cleaned_data['picture']
+        #     UserCard.save()
+        #     print(UserCard.picture)
+        # else:
+        #     form= UploadFileForm()
 
         biography = request.POST.get('biography')
         sexuality = request.POST.get('sexuality')

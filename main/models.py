@@ -13,6 +13,7 @@ class UserCard(models.Model):
     distance_from_current_user = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
     coordinates = models.CharField(max_length=50)
+    # picture = models.ImageField(upload_to= 'pictures')
 
     def __str__(self):
         return self.email + ',' + self.username + ',' + self.biography + ','\
