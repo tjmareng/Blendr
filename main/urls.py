@@ -28,4 +28,5 @@ urlpatterns = [
     url('login.html/', views.reset_password, name="reset_password"),
     url('friends.html/', views.goto_friends_page, name="friends"),
     url('ViewProfile.html/', views.goto_edit_profile, name="account"),
+    url('homepage.html/', views.update_friends, name="update_friends"),
 ]

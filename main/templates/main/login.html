@@ -35,10 +35,12 @@
         <button class="open-button" onclick="openForm()"><u>Forgot Password?</u></button>
 
         <div class="form-popup" id="myForm">
-            <form action={% url 'reset_password'%} class="form-container" method="POST">
+            <form action={% url 'reset_password' %} class="form-container" method="POST">
                 {% csrf_token %}
                 <label><b>Enter your email to reset your password.</b></label>
-                <input type="text" placeholder="example@test.com" name="email" required>
+                <label>
+                    <input type="text" placeholder="example@test.com" name="email" required>
+                </label>
                 <button type="submit" class="btn">Submit</button>
             </form>
         </div>
