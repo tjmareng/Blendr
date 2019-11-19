@@ -44,12 +44,19 @@
             <form action={% url 'login'%} class="form-container" method="POST">
                 {% csrf_token %}
                 <div class="slidecontainer">
-                <p>Age Range</p>
-                    <div id="textInput" value="">
-                  <input type="range" min="21" max="100" value="50" class="slider" id="ageRange">
+
+                <p>Age Difference</p>
+
+                  <label id="ageRange">10</label><label id="units"> &nbsp Years</label>
+                  <input type="range" min="0" max="20" value="10" class="slider" id="distanceRange"
+                  oninput="document.getElementById('ageRange').innerHTML = this.value">
+
                 <p>Maximum Distance</p>
-                  <input type="range" min="1" max="100" value="50" class="slider" id="distanceRange">
-                </div>
+                    <label id="distance">50</label><label id="units"> &nbsp Miles</label>
+                  <input type="range" min="1" max="100" value="50" class="slider" id="distanceRange"
+                  oninput="document.getElementById('distance').innerHTML = this.value">
+
+
                 <button type="submit" class="btn">Submit</button>
                 </div>
             </form>
@@ -75,9 +82,12 @@
             <div id="bio">
                 <p>{{ usercard.biography }}</p>
             </div>
-            <div id = "likeButton">
-                <input class= "like_button" type="submit" value="">
+            <form method="post">
+                <div id = "likeButton">
+                <input class= "like_button" type="submit" value={{ usercard.email }}>
             </div>
+
+            </form>
 
 
 
