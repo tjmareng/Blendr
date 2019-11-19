@@ -48,7 +48,6 @@ def goto_profile_creation(request):
 def goto_complete_registration(request):
     if request.method == 'POST':
         # after finishing registration
-        friends_list = []
         username = request.COOKIES.get('registration_value_username')
         email = request.COOKIES.get('registration_value_email')
         password = request.COOKIES.get('registration_value_password')
@@ -71,7 +70,7 @@ def goto_complete_registration(request):
         birthday = request.POST.get('birthday')
         age = calculate_age(birthday)
         ip_address = get_client_ip_address(request)
-
+        friends_list = [False]
         if age >= 21:
             # upload user to database
             new_user = {'email': email, 'username': username, 'biography': biography,
@@ -221,3 +220,7 @@ def retrieve_database_users_friends_only(current_user_friends):
             user_card_list.append(new_user_card)
     context_dict = {"Users": user_card_list}
     return context_dict
+
+def update_friends(user_token, cl_email):
+    user_info(user_token)["friends"].append(cl_email)
+    return True
