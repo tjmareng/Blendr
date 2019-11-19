@@ -96,27 +96,7 @@ def calculate_age(birth_date_string):
 
 
 def goto_homepage(request):
-    # create users based on the database
-    user_card_list = []
-    results = db.child("users").get()
-
-    # distance = get_distance
-
-    for key in results.val():
-        username = results.val()[key]["username"]
-        bio = results.val()[key]["biography"]
-        birthday = results.val()[key]["birthday"]
-        gender = results.val()[key]["gender"]
-        sexuality = results.val()[key]["sexuality"]
-        email = results.val()[key]["email"]
-        age = results.val()[key]["age"]
-        city = get_city_from_ip_address(results.val()[key]["ip_address"])
-
-        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
-                                 email=email, age=age, city=city)
-        user_card_list.append(new_user_card)
-    context_dict = {"Users": user_card_list}
-
+    context_dict = retrieve_database_users()
     return render(request, "main/homepage.html", context=context_dict)
 
 
@@ -168,7 +148,10 @@ def verify_login_credentials(request):
 
 
 def goto_friends_page(request):
-    return render(request, 'main/friends.html')
+    current_user = user_info(request.COOKIES.get('user_id_token'))
+    current_user_friends = current_user['friends']
+    context_dict = retrieve_database_users_friends_only(current_user_friends)
+    return render(request, 'main/friends.html', context=context_dict)
 
 
 def get_client_ip_address(request):
@@ -199,3 +182,42 @@ def get_distance_between_ip_addresses(ip1, ip2):
 
 def goto_edit_profile(request):
     return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))
+
+
+def retrieve_database_users():
+    user_card_list = []
+    results = db.child("users").get()
+    for key in results.val():
+        username = results.val()[key]["username"]
+        bio = results.val()[key]["biography"]
+        birthday = results.val()[key]["birthday"]
+        gender = results.val()[key]["gender"]
+        sexuality = results.val()[key]["sexuality"]
+        email = results.val()[key]["email"]
+        age = results.val()[key]["age"]
+        city = get_city_from_ip_address(results.val()[key]["ip_address"])
+        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
+                                 email=email, age=age, city=city)
+        user_card_list.append(new_user_card)
+    context_dict = {"Users": user_card_list}
+    return context_dict
+
+
+def retrieve_database_users_friends_only(current_user_friends):
+    user_card_list = []
+    results = db.child("users").get()
+    for key in results.val():
+        email = results.val()[key]["email"]
+        if clean_email(email) in current_user_friends:
+            username = results.val()[key]["username"]
+            bio = results.val()[key]["biography"]
+            birthday = results.val()[key]["birthday"]
+            gender = results.val()[key]["gender"]
+            sexuality = results.val()[key]["sexuality"]
+            age = results.val()[key]["age"]
+            city = get_city_from_ip_address(results.val()[key]["ip_address"])
+            new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
+                                     email=email, age=age, city=city)
+            user_card_list.append(new_user_card)
+    context_dict = {"Users": user_card_list}
+    return context_dict
