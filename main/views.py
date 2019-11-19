@@ -223,4 +223,3 @@ def retrieve_database_users_friends_only(current_user_friends):
 
 def update_friends(user_token, cl_email):
     user_info(user_token)["friends"].append(cl_email)
-    return True
