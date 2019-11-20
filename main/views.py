@@ -126,12 +126,14 @@ def user_info(user_token):
     birthday = card_info.val()[key]['birthday']
     email = card_info.val()[key]['email']
     ip_address = card_info.val()[key]['ip_address']
+    friends = card_info.val()[key]['friends']
     info_dict = {'username': username, "age": age, "biography": biography, "sexuality": sexuality,
-                 "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address}
+                 "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address, "friends": friends,}
     return info_dict
 
 
 def verify_login_credentials(request):
+    print("Verify Login Credentials")
     if request.method == 'POST':
         email = request.POST.get('Email')
         password = request.POST.get('Password')
@@ -223,9 +225,9 @@ def retrieve_database_users_friends_only(current_user_friends):
 
 
 def update_friends(request):
-    print('updating friends')
-    cleaned_email = clean_email(request.POST.get('like_button'))
-    print(cleaned_email)
-    print('checkpoint')
-    user_info(request.COOKIES.get('user_id_token'))["friends"].append(cleaned_email)
+    cleaned_friends_email = clean_email(request.POST.get('like_button'))
+    current_user = user_info(request.COOKIES.get('user_id_token'))
+    current_user["friends"].append(cleaned_friends_email)
+    current_user_cleaned_email = clean_email(current_user['email'])
+    db.child("users").child(current_user_cleaned_email).set(current_user)
     return goto_homepage(request)

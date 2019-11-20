@@ -82,10 +82,10 @@
             <div id="bio">
                 <p>{{ usercard.biography }}</p>
             </div>
-            <form action={% url 'update_friends' %} method="POST">
+            <form method="post" action={% url 'update_friends' %}>
                 {% csrf_token %}
                 <div id = "likeButton">
-                <input class= "like_button" type="submit" value={{ usercard.email }}>
+                <input class= "like_button" type="submit" name="like_button" value={{ usercard.email }}>
             </div>
 
             </form>
