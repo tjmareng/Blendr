@@ -227,6 +227,9 @@ def retrieve_database_users_friends_only(current_user_friends):
 def update_friends(request):
     cleaned_friends_email = clean_email(request.POST.get('like_button'))
     current_user = user_info(request.COOKIES.get('user_id_token'))
+    for friend in current_user["friends"]:
+            if friend == cleaned_friends_email:
+                return goto_homepage(request)
     current_user["friends"].append(cleaned_friends_email)
     current_user_cleaned_email = clean_email(current_user['email'])
     db.child("users").child(current_user_cleaned_email).set(current_user)
