@@ -223,6 +223,9 @@ def retrieve_database_users_friends_only(current_user_friends):
 
 
 def update_friends(request):
+    print('updating friends')
     cleaned_email = clean_email(request.POST.get('like_button'))
     print(cleaned_email)
+    print('checkpoint')
     user_info(request.COOKIES.get('user_id_token'))["friends"].append(cleaned_email)
+    return goto_homepage(request)
