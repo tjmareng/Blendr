@@ -13,8 +13,10 @@
 <div id="navBar">
 
     <div id="navLogo">
-
-            <img src="../../static/images/logo_white.png"height="75" width="200">
+        <form action={% url 'homepage' %} method="POST">
+            {% csrf_token %}
+            <input type="image" src="../../static/images/logo_white.png"height="75" width="200" alt="Submit">
+        </form>
     </div>
     <a href=""></a>
     <div id="friendsIcon">

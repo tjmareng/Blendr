@@ -231,9 +231,10 @@ def update_friends(request):
     for friend in current_user["friends"]:
             if friend == cleaned_friends_email:
                 return goto_homepage(request)
-    current_user["friends"].append(cleaned_friends_email)
     current_user_cleaned_email = clean_email(current_user['email'])
-    db.child("users").child(current_user_cleaned_email).set(current_user)
+    if cleaned_friends_email != current_user_cleaned_email:
+        current_user["friends"].append(cleaned_friends_email)
+        db.child("users").child(current_user_cleaned_email).set(current_user)
     return goto_homepage(request)
 
 def remove_friend(request):
