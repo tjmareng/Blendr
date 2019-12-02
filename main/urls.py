@@ -26,6 +26,7 @@ urlpatterns = [
     url('homepage.html/verify_credentials', views.verify_login_credentials, name="verify_login_credentials"),
     url('homepage.html/home', views.goto_homepage, name="homepage"),
     url('homepage.html/update', views.update_friends, name="update_friends"),
+    url('friends.html/remove', views.remove_friend, name="remove_friend"),
     url('emailVerification.html/', views.goto_complete_registration, name="email_verification"),
     url('friends.html/', views.goto_friends_page, name="friends"),
     url('ViewProfile.html/', views.goto_edit_profile, name="account"),

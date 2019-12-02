@@ -151,6 +151,7 @@ def verify_login_credentials(request):
 def goto_friends_page(request):
     current_user = user_info(request.COOKIES.get('user_id_token'))
     current_user_friends = current_user['friends']
+    print(current_user_friends)
     context_dict = retrieve_database_users_friends_only(current_user_friends)
     return render(request, 'main/friends.html', context=context_dict)
 
@@ -234,3 +235,13 @@ def update_friends(request):
     current_user_cleaned_email = clean_email(current_user['email'])
     db.child("users").child(current_user_cleaned_email).set(current_user)
     return goto_homepage(request)
+
+def remove_friend(request):
+    cleaned_friends_email = clean_email(request.POST.get('like_button'))
+    current_user = user_info(request.COOKIES.get('user_id_token'))
+    for friend in current_user["friends"]:
+        if friend == cleaned_friends_email:
+            current_user["friends"].remove(friend)
+            current_user_cleaned_email = clean_email(current_user['email'])
+            db.child("users").child(current_user_cleaned_email).set(current_user)
+    return goto_friends_page(request)

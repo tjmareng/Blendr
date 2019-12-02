@@ -1,31 +1,99 @@
 <!DOCTYPE html>
-
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mainPagesStyle.css' %}">
+<!--<link rel="stylesheet" type="text/css" href='C:\Users\liamr\Desktop\Blendr\main\static\css\mainPagesStyle.css'>-->
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/mainPagesStyle.css' %}"/>
 </head>
 <body>
 <div id="navBar">
 
     <div id="navLogo">
 
-        <img src="../../static/images/logo_white.png"height="75" width="200">
+            <img src="../../static/images/logo_white.png"height="75" width="200">
     </div>
-
+    <a href=""></a>
     <div id="friendsIcon">
-        <input class= "friends_button" type="button" value="">
+        <form action={% url 'friends'%} method="POST">
+            {% csrf_token %}
+            <input class= "friends_button" type="submit" value="">
+        </form>
     </div>
+
     <div id="messagesIcon">
-        <input class= "messages_button" type="button" value="">
+        <input class= "messages_button" type="submit" value="">
     </div>
+    <form action={% url 'account' %} method="POST">
     <div id="accountIcon">
-        <input class= "account_button" type="button" value="">
+        <input class= "account_button" type="submit" value="">
     </div>
+        </form>
+</div>
+
+    <div id = top_buttons>
 
 
+            <button class="open-button" onclick="openForm()">Filters</button>
+
+                <div class="form-popup" id="myForm">
+            <form action={% url 'login'%} class="form-container" method="POST">
+                {% csrf_token %}
+                <div class="slidecontainer">
+
+                <p>Age Difference</p>
+
+                  <label id="ageRange">10</label><label id="units"> &nbsp Years</label>
+                  <input type="range" min="0" max="20" value="10" class="slider" id="distanceRange"
+                  oninput="document.getElementById('ageRange').innerHTML = this.value">
+
+                <p>Maximum Distance</p>
+                    <label id="distance">50</label><label id="units"> &nbsp Miles</label>
+                  <input type="range" min="1" max="100" value="50" class="slider" id="distanceRange"
+                  oninput="document.getElementById('distance').innerHTML = this.value">
+
+
+                <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+
+
+        <script>
+            function openForm() {
+             document.getElementById("myForm").style.display = "block";
+        }
+        </script>
+    </div>
+    </div>
+<div id = "userDisplay">
+    {% for usercard in Users %}
+        <div id = "userCard">
+            <div id = "profilePicture">
+
+            </div>
+            <div id = "nameAgeCity">
+                <p>   {{ usercard.username }}&nbsp   {{ usercard.age }}&nbsp   {{ usercard.city }}</p>
+            </div>
+
+            <div id="bio">
+                <p>{{ usercard.biography }}</p>
+            </div>
+            <form method="post" action={% url 'remove_friend' %}>
+                {% csrf_token %}
+                <div id = "likeButton">
+                <input class= "like_button" type="submit" name="like_button" value={{ usercard.email }}>
+            </div>
+
+            </form>
+
+
+
+        </div>
+
+    {% endfor %}
 </div>
 
 
