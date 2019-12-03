@@ -26,30 +26,147 @@
 </div>
 
 <div id ="ViewProfileBox">
-    <div id="profileInputs">
-        <div id="profilePictures">
+
+    <form action={% url 'updateProfile'%}, method="POST" >
+        {% csrf_token %}
+        <div id="profileInputs">
+            <div id="profilePictures">
+                <input type='file' id="imgInp" placeholder="Picture" name="picture"/>
+            </div>
+
+            <div id="username">
+                <header>Name:</header>
+                <input type="text" name="Username" value="{{ username }}"/>
+
+            </div>
+            <header>Biography:</header>
+
+            <div id="biography">
+                <textarea name="biography" cols="50" rows="7" maxlength="140" value="{{ biography }}"></textarea>
+            </div>
+            <style>
+                /* The container */
+                .container {
+                    display: inline-block;
+                    position: relative;
+                    padding-left: 25px;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    font-size: 15px;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                /* Hide the browser's default radio button */
+                .container input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                /* Create a custom radio button */
+                .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 20px;
+                    width: 20px;
+                    background-color: #eee;
+                    border-radius: 50%;
+                }
+
+                /* On mouse-over, add a grey background color */
+                .container:hover input ~ .checkmark {
+                    background-color: #ccc;
+                }
+
+                /* When the radio button is checked, add a blue background */
+                .container input:checked ~ .checkmark {
+                    background-color: #000000;
+                }
+
+                /* Create the indicator (the dot/circle - hidden when not checked) */
+                .checkmark:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                }
+
+                /* Show the indicator (dot/circle) when checked */
+                .container input:checked ~ .checkmark:after {
+                    display: block;
+                }
+
+                /* Style the indicator (dot/circle) */
+                .container .checkmark:after {
+                    top: 9px;
+                    left: 9px;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: none;
+                }
+            </style>
+
+            <div id="gender">
+                <header>Gender:</header>
+
+                {%  if gender == "male" %}
+                    <label class="container">Male
+                        <input type="radio" name="gender" value="male" checked >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Female
+                        <input type="radio" name="gender" value="female">
+                        <span class="checkmark"></span>
+                    </label>
+                {% endif %}
+                {% if gender == "female" %}
+                    <label class="container">Male
+                        <input type="radio" name="gender" value="male" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Female
+                        <input type="radio" name="gender" value="female" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                {% endif %}
+
+            </div>
+            s
+            <div id="sexuality">
+                <header>Interested in:</header>
+                {%  if sexuality == "male" %}
+                    <label class="container">Male
+                        <input type="radio" name="sexuality" value="male" checked >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Female
+                        <input type="radio" name="sexuality" value="female">
+                        <span class="checkmark"></span>
+                    </label>
+                {% endif %}
+                {% if sexuality == "female" %}
+                    <label class="container">Male
+                        <input type="radio" name="sexuality" value="male" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Female
+                        <input type="radio" name="sexuality" value="female" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                {% endif %}
+
+            </div>
+
+            <div id = "Update Profile">
+                <input type="submit" name="complete_registration" value = "Submit"/>
+            </div>
 
         </div>
-
-        <div id="username">
-
-        </div>
-
-        <div id="biography">
-
-        </div>
-
-        <div id="gender">
-
-        </div>
-s
-        <div id="sexuality">
-
-        </div>
-
-
-
-    </div>
+    </form>
 </div>
 
 
