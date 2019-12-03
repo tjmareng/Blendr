@@ -5,7 +5,7 @@ from django.test import TestCase
 import string
 
 from Blendr.firebase_config import auth
-from .views import clean_email, user_info
+from .views import clean_email, user_info, calculate_age, get_city_from_ip_address, get_distance_between_ip_addresses
 from selenium import webdriver
 import unittest
 
@@ -14,8 +14,9 @@ import unittest
 class TestCases(unittest.TestCase):
     def test_user_info(self):
         user = auth.sign_in_with_email_and_password('lgrimaso@mtu.edu', 123123)
-        correct_dict = {"username": "Logan", "age": 22, "biography": "Just want the physical affection and personal connection with another human being.",
-                        "sexuality": "female", "gender": "male", "birthday": "1997-05-18", "email": "lgrimaso@mtu.edu"}
+        correct_dict = {"username": "Logan", "age": 25, "biography": "My name is Logan, and I am pretty cool.",
+                        "sexuality": "female", "gender": "male", "birthday": "1994-11-13", "email": "lgrimaso@mtu.edu"
+                        , "friends": [False, "javenwilliamgmail.com", "lnrobinsmtu.edu"], "ip_address": "141.219.226.150"}
         self.assertEqual(correct_dict, user_info(user['idToken']))
 
 
@@ -23,6 +24,19 @@ class TestCases(unittest.TestCase):
         email = "lgrimaso@mtu.edu"
         self.assertEqual(clean_email(email), "lgrimasomtuedu")
 
+
+    def test_calculate_age(self):
+        birth_date = "1999-05-18"
+        self.assertEqual(20, calculate_age(birth_date))
+
+
+    def test_get_city_from_IP_address(self):
+        self.assertEqual("Houghton", get_city_from_ip_address('141.219.226.150'))
+
+
+    def test_get_distance_between_ip_addresses(self):
+        print(get_distance_between_ip_addresses("141.219.226.150", "12.2.202.242"))
+        self.assertEqual(439.90215249153596, get_distance_between_ip_addresses("141.219.226.150", "12.2.202.242"))
 
     @classmethod
     def test_createUser(cls):
