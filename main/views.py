@@ -1,3 +1,4 @@
+import math
 from builtins import int, ValueError, len
 from django.contrib.gis.geoip2 import GeoIP2
 from datetime import date, datetime
@@ -86,17 +87,28 @@ def goto_complete_registration(request):
             print('under aged')
             raise ValueError('You have to be 21 to be on Blendr')
 
+def goto_homepage(request):
+    context_dict = retrieve_database_users()
+    return render(request, "main/homepage.html", context=context_dict)
+
+
+def goto_friends_page(request):
+    current_user = user_info(request.COOKIES.get('user_id_token'))
+    current_user_friends = current_user['friends']
+    print(current_user_friends)
+    context_dict = retrieve_database_users_friends_only(current_user_friends)
+    return render(request, 'main/friends.html', context=context_dict)
+
+
+def goto_edit_profile(request):
+    return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))
+
 
 def calculate_age(birth_date_string):
     days_in_year = 365.2425
     birth_date = datetime.strptime(birth_date_string, '%Y-%m-%d').date()
     age = int((date.today() - birth_date).days / days_in_year)
     return age
-
-
-def goto_homepage(request):
-    context_dict = retrieve_database_users()
-    return render(request, "main/homepage.html", context=context_dict)
 
 
 def reset_password(request):
@@ -148,14 +160,6 @@ def verify_login_credentials(request):
         return response
 
 
-def goto_friends_page(request):
-    current_user = user_info(request.COOKIES.get('user_id_token'))
-    current_user_friends = current_user['friends']
-    print(current_user_friends)
-    context_dict = retrieve_database_users_friends_only(current_user_friends)
-    return render(request, 'main/friends.html', context=context_dict)
-
-
 def get_client_ip_address(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -177,13 +181,18 @@ def get_city_from_ip_address(ip_address):
 def get_distance_between_ip_addresses(ip1, ip2):
     g = GeoIP2()
     coordinates1 = g.lat_lon(ip1)
-    coordinates2 = g.lon_lat(ip2)
-    print(coordinates1 + ', ' + coordinates2)
-    # TODO implement distance calculation
-
-
-def goto_edit_profile(request):
-    return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))
+    coordinates2 = g.lat_lon(ip2)
+    print(coordinates1)
+    print(coordinates2)
+    x = coordinates2[0] - coordinates1[0]
+    y = coordinates2[1] - coordinates1[1]
+    x_squared = x**2
+    y_squared = y**2
+    sum = x_squared + y_squared
+    distance = math.sqrt(sum)
+    distance_in_km = distance * 100
+    distance_in_miles = distance_in_km/1.60934
+    return distance_in_miles
 
 
 def retrieve_database_users():
