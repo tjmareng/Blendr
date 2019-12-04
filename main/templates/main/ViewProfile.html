@@ -8,26 +8,34 @@
 </head>
 <body>
 <div id="navBar">
-
     <div id="navLogo">
-
-        <img src="../../static/images/logo_white.png"height="75" width="200">
+        <form action={% url 'homepage' %} method="POST">
+            {% csrf_token %}
+            <input type="image" src="../../static/images/logo_white.png"height="75" width="200" alt="Submit">
+        </form>
     </div>
-
+    <a href=""></a>
     <div id="friendsIcon">
-        <input class= "friends_button" type="button" value="">
+        <form action={% url 'friends'%} method="POST">
+            {% csrf_token %}
+            <input class= "friends_button" type="submit" value="">
+        </form>
     </div>
+
     <div id="messagesIcon">
-        <input class= "messages_button" type="button" value="">
+        <input class= "messages_button" type="submit" value="">
     </div>
-    <div id="accountIcon">
-        <input class= "account_button" type="button" value="">
-    </div>
+        <form action={% url 'account' %} method="POST">
+            {% csrf_token %}
+            <div id="accountIcon">
+                <input class= "account_button" type="submit" value="">
+            </div>
+        </form>
 </div>
 
 <div id ="ViewProfileBox">
 
-    <form action={% url 'updateProfile'%}, method="POST" >
+    <form action={% url 'update_profile' %} method="POST">
         {% csrf_token %}
         <div id="profileInputs">
             <div id="profilePictures">
@@ -36,13 +44,17 @@
 
             <div id="username">
                 <header>Name:</header>
-                <input type="text" name="Username" value="{{ username }}"/>
+                <label>
+                    <input type="text" name="Username" value="{{ username }}"/>
+                </label>
 
             </div>
             <header>Biography:</header>
 
             <div id="biography">
-                <textarea name="biography" cols="50" rows="7" maxlength="140" value="{{ biography }}"></textarea>
+                <label>
+                    <textarea name="biography" cols="50" rows="7" maxlength="140" value="{{ biography }}"></textarea>
+                </label>
             </div>
             <style>
                 /* The container */
@@ -135,7 +147,7 @@
                 {% endif %}
 
             </div>
-            s
+
             <div id="sexuality">
                 <header>Interested in:</header>
                 {%  if sexuality == "male" %}

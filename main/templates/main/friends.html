@@ -29,10 +29,11 @@
     <div id="messagesIcon">
         <input class= "messages_button" type="submit" value="">
     </div>
-    <form action={% url 'account' %} method="POST">
-    <div id="accountIcon">
-        <input class= "account_button" type="submit" value="">
-    </div>
+        <form action={% url 'account' %} method="POST">
+            {% csrf_token %}
+            <div id="accountIcon">
+                <input class= "account_button" type="submit" value="">
+            </div>
         </form>
 </div>
 

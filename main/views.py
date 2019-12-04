@@ -5,21 +5,22 @@ from datetime import date, datetime
 
 from django.shortcuts import render, render_to_response
 from django.template import Context
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from requests import HTTPError
 
 from Blendr.firebase_config import db, auth, pyrebase, storage
 from main.forms import UploadFileForm
 from main.models import UserCard
 
-
+@csrf_protect
 def goto_index(request):
     return render(request, 'main/index.html')
 
-
+@csrf_protect
 def goto_login(request):
     return render(request, 'main/login.html')
 
-
+@csrf_protect
 def goto_profile_creation(request):
     if request.method == 'POST':
         username = request.POST.get('Username')
@@ -45,7 +46,7 @@ def goto_profile_creation(request):
         response.set_cookie('registration_value_password', password, max_age=None)
         return response
 
-
+@csrf_protect
 def goto_complete_registration(request):
     if request.method == 'POST':
         # after finishing registration
@@ -87,11 +88,12 @@ def goto_complete_registration(request):
             print('under aged')
             raise ValueError('You have to be 21 to be on Blendr')
 
+@csrf_protect
 def goto_homepage(request):
     context_dict = retrieve_database_users()
     return render(request, "main/homepage.html", context=context_dict)
 
-
+@csrf_protect
 def goto_friends_page(request):
     current_user = user_info(request.COOKIES.get('user_id_token'))
     current_user_friends = current_user['friends']
@@ -99,7 +101,7 @@ def goto_friends_page(request):
     context_dict = retrieve_database_users_friends_only(current_user_friends)
     return render(request, 'main/friends.html', context=context_dict)
 
-
+@csrf_exempt
 def goto_edit_profile(request):
     return render(request, 'main/ViewProfile.html', context=user_info(request.COOKIES.get('user_id_token')))
 
@@ -143,7 +145,7 @@ def user_info(user_token):
                  "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address, "friends": friends,}
     return info_dict
 
-
+@csrf_protect
 def verify_login_credentials(request):
     print("Verify Login Credentials")
     if request.method == 'POST':
@@ -255,3 +257,6 @@ def remove_friend(request):
             current_user_cleaned_email = clean_email(current_user['email'])
             db.child("users").child(current_user_cleaned_email).set(current_user)
     return goto_friends_page(request)
+
+def update_profile(request):
+    print("It worked!")
