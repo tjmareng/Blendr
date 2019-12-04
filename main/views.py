@@ -88,9 +88,17 @@ def goto_complete_registration(request):
             print('under aged')
             raise ValueError('You have to be 21 to be on Blendr')
 
+
+def goto_homepage_url(request):
+    current_user = user_info(request.COOKIES.get('user_id_token'))
+    filter_age_range = request.POST.get('filter_age_range')
+    filter_distance_range = request.POST.get('filter_distance_range')
+    return goto_homepage(request, current_user, filter_age_range, filter_distance_range)
+
+
 @csrf_protect
-def goto_homepage(request):
-    context_dict = retrieve_database_users()
+def goto_homepage(request, current_user, filter_age_range, filter_distance_range):
+    context_dict = retrieve_database_users(current_user, filter_age_range, filter_distance_range)
     return render(request, "main/homepage.html", context=context_dict)
 
 @csrf_protect
@@ -154,7 +162,9 @@ def verify_login_credentials(request):
         # try:
         # sign_in_with_email_and_password returns user data with an "idToken"
         user = auth.sign_in_with_email_and_password(email, password)
-        response = goto_homepage(request)
+        current_user = user_info(user['idToken'])
+
+        response = goto_homepage(request, current_user, 10, 50)
         response.set_cookie('user_id_token', user['idToken'], max_age=None)
         user_info(user['idToken'])
         # except HTTPError:
@@ -197,21 +207,43 @@ def get_distance_between_ip_addresses(ip1, ip2):
     return distance_in_miles
 
 
-def retrieve_database_users():
+def retrieve_database_users(current_user, filter_age_range, filter_distance_range):
     user_card_list = []
     results = db.child("users").get()
+
+    current_user_ip_address = current_user['ip_address']
+    current_user_age = current_user['age']
+
+    filter_age_range = int(filter_age_range)
+    filter_distance_range = int(filter_distance_range)
+
     for key in results.val():
-        username = results.val()[key]["username"]
-        bio = results.val()[key]["biography"]
-        birthday = results.val()[key]["birthday"]
-        gender = results.val()[key]["gender"]
-        sexuality = results.val()[key]["sexuality"]
-        email = results.val()[key]["email"]
-        age = results.val()[key]["age"]
-        city = get_city_from_ip_address(results.val()[key]["ip_address"])
-        new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
-                                 email=email, age=age, city=city)
-        user_card_list.append(new_user_card)
+
+        other_user_ip_address = results.val()[key]['ip_address']
+        other_user_age = results.val()[key]["age"]
+        calculated_distance = get_distance_between_ip_addresses(current_user_ip_address, other_user_ip_address)
+
+        passed_age_filter = False
+        passed_distance_filter = False
+
+        if (other_user_age - filter_age_range) <= current_user_age <= (other_user_age + filter_age_range):
+            passed_age_filter = True
+
+        if calculated_distance <= filter_distance_range:
+            passed_distance_filter = True
+
+        if passed_age_filter and passed_distance_filter:
+            username = results.val()[key]["username"]
+            bio = results.val()[key]["biography"]
+            birthday = results.val()[key]["birthday"]
+            gender = results.val()[key]["gender"]
+            sexuality = results.val()[key]["sexuality"]
+            email = results.val()[key]["email"]
+            city = get_city_from_ip_address(results.val()[key]["ip_address"])
+            new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
+                                 email=email, age=other_user_age, city=city)
+            user_card_list.append(new_user_card)
+
     context_dict = {"Users": user_card_list}
     return context_dict
 
