@@ -259,4 +259,14 @@ def remove_friend(request):
     return goto_friends_page(request)
 
 def update_profile(request):
-    print("It worked!")
+    if request.method == 'POST':
+        username = request.POST.get('Username')
+        biography = request.POST.get('biography')
+        gender = request.POST.get('gender')
+        sexuality = request.POST.get('sexuality')
+        current_user = user_info(request.COOKIES.get('user_id_token'))
+        current_user["username"].set(username)
+        current_user["biography"].set(biography)
+        current_user["gender"].set(gender)
+        current_user["sexuality"].set(sexuality)
+    return goto_edit_profile(request)
