@@ -41,7 +41,7 @@
             <div id="profilePictures">
                 <input type='file' id="imgInp" placeholder="Picture" name="picture"/>
             </div>
-
+<br>
             <div id="username">
                 <header>Name:</header>
                 <label>
@@ -49,13 +49,17 @@
                 </label>
 
             </div>
-            <header>Biography:</header>
+        <br>
+        <header>Biography:</header>
 
             <div id="biography">
                 <label>
-                    <textarea name="biography" cols="50" rows="7" maxlength="140" value="{{ biography }}"></textarea>
+                    <textarea name="biography" cols="50" rows="7" maxlength="140" >
+                        {{ biography }}
+                    </textarea>
                 </label>
             </div>
+            <br>
             <style>
                 /* The container */
                 .container {
@@ -147,6 +151,7 @@
                 {% endif %}
 
             </div>
+            <br>
 
             <div id="sexuality">
                 <header>Interested in:</header>
@@ -172,7 +177,7 @@
                 {% endif %}
 
             </div>
-
+            <br>
             <div id = "Update Profile">
                 <input type="submit" name="complete_registration" value = "Submit"/>
             </div>
