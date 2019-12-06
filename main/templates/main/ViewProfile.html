@@ -22,9 +22,7 @@
         </form>
     </div>
 
-    <div id="messagesIcon">
-        <input class= "messages_button" type="submit" value="">
-    </div>
+
         <form action={% url 'account' %} method="POST">
             {% csrf_token %}
             <div id="accountIcon">

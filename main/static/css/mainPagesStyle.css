@@ -50,7 +50,7 @@ margin-left: 45%;
     background-size: 40px 40px;
     border:none;
     position: absolute;
-    right: 130px;
+    right: 70px;
     top: 16px;
     transition: all .1s ease-in-out;
 }
@@ -194,14 +194,20 @@ transform: scale(1.2);
     float: left;
     margin: 70px;
     font-family: Calibri;
-    border: solid gray 1px;
-    border-radius: 10px;
+    border-radius: 9px;
     overflow-wrap: break-word;
     word-wrap: break-word;
     position: relative;
 }
 #nameAge{
+    padding-left: 5px;
     display: flex;
+}
+#nameAgeCity{
+    padding-left: 5px;
+}
+#profPic{
+    border-radius: 9px;
 }
 #profilePicture{
     height: 225px;

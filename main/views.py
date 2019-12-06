@@ -272,14 +272,17 @@ def retrieve_database_users_friends_only(current_user_friends):
 def update_friends(request):
     cleaned_friends_email = clean_email(request.POST.get('like_button'))
     current_user = user_info(request.COOKIES.get('user_id_token'))
+    filter_age_range = request.POST.get('filter_age_range')
+    filter_distance_range = request.POST.get('filter_distance_range')
+
     for friend in current_user["friends"]:
             if friend == cleaned_friends_email:
-                return goto_homepage(request)
+                return goto_homepage(request, current_user, filter_age_range, filter_distance_range)
     current_user_cleaned_email = clean_email(current_user['email'])
     if cleaned_friends_email != current_user_cleaned_email:
         current_user["friends"].append(cleaned_friends_email)
         db.child("users").child(current_user_cleaned_email).set(current_user)
-    return goto_homepage(request)
+    return goto_homepage(request, current_user, filter_age_range, filter_distance_range)
 
 def remove_friend(request):
     cleaned_friends_email = clean_email(request.POST.get('like_button'))

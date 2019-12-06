@@ -24,9 +24,7 @@
         </form>
     </div>
 
-    <div id="messagesIcon">
-        <input class= "messages_button" type="submit" value="">
-    </div>
+
     <form action={% url 'account' %} method="POST">
     <div id="accountIcon">
         <input class= "account_button" type="submit" value="">
@@ -72,7 +70,7 @@
     {% for usercard in Users %}
         <div id = "userCard">
             <div id = "profilePicture">
-                <img src={{ usercard.pic }}, height="225" width="350">
+                <img id="profPic" src={{ usercard.pic }}, height="225" width="350">
             </div>
             <div id = "nameAgeCity">
                 <p>   {{ usercard.username }}&nbsp   {{ usercard.age }}&nbsp   {{ usercard.city }}</p>

@@ -26,9 +26,7 @@
         </form>
     </div>
 
-    <div id="messagesIcon">
-        <input class= "messages_button" type="submit" value="">
-    </div>
+
         <form action={% url 'account' %} method="POST">
             {% csrf_token %}
             <div id="accountIcon">
@@ -40,28 +38,7 @@
     <div id = top_buttons>
 
 
-            <button class="open-button" onclick="openForm()">Filters</button>
 
-                <div class="form-popup" id="myForm">
-            <form action={% url 'login'%} class="form-container" method="POST">
-                {% csrf_token %}
-                <div class="slidecontainer">
-
-                <p>Age Difference</p>
-
-                  <label id="ageRange">10</label><label id="units"> &nbsp Years</label>
-                  <input type="range" min="0" max="20" value="10" class="slider" id="distanceRange"
-                  oninput="document.getElementById('ageRange').innerHTML = this.value">
-
-                <p>Maximum Distance</p>
-                    <label id="distance">50</label><label id="units"> &nbsp Miles</label>
-                  <input type="range" min="1" max="100" value="50" class="slider" id="distanceRange"
-                  oninput="document.getElementById('distance').innerHTML = this.value">
-
-
-                <button type="submit" class="btn">Submit</button>
-                </div>
-            </form>
 
 
         <script>
