@@ -98,6 +98,10 @@ def goto_homepage_url(request):
 
 @csrf_protect
 def goto_homepage(request, current_user, filter_age_range, filter_distance_range):
+    if filter_age_range is None:
+        filter_age_range = 10
+    if filter_distance_range is None:
+        filter_distance_range = 50
     context_dict = retrieve_database_users(current_user, filter_age_range, filter_distance_range)
     return render(request, "main/homepage.html", context=context_dict)
 
@@ -208,6 +212,10 @@ def get_distance_between_ip_addresses(ip1, ip2):
 
 
 def retrieve_database_users(current_user, filter_age_range, filter_distance_range):
+    if filter_age_range is None:
+        filter_age_range = 10
+    if filter_distance_range is None:
+        filter_distance_range = 50
     user_card_list = []
     results = db.child("users").get()
 
@@ -261,9 +269,10 @@ def retrieve_database_users_friends_only(current_user_friends):
             gender = results.val()[key]["gender"]
             sexuality = results.val()[key]["sexuality"]
             age = results.val()[key]["age"]
+            pic = results.val()[key]["Pic"]
             city = get_city_from_ip_address(results.val()[key]["ip_address"])
             new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
-                                     email=email, age=age, city=city)
+                                     email=email, age=age, city=city, pic=pic)
             user_card_list.append(new_user_card)
     context_dict = {"Users": user_card_list}
     return context_dict
@@ -301,8 +310,8 @@ def update_profile(request):
         gender = request.POST.get('gender')
         sexuality = request.POST.get('sexuality')
         current_user = user_info(request.COOKIES.get('user_id_token'))
-        current_user["username"].set(username)
-        current_user["biography"].set(biography)
-        current_user["gender"].set(gender)
-        current_user["sexuality"].set(sexuality)
+        db.child("users").child(clean_email(current_user['email'])).update({"username": username})
+        db.child("users").child(clean_email(current_user['email'])).update({"biography": biography})
+        db.child("users").child(clean_email(current_user['email'])).update({"gender": gender})
+        db.child("users").child(clean_email(current_user['email'])).update({"sexuality": sexuality})
     return goto_edit_profile(request)

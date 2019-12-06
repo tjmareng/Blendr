@@ -51,9 +51,9 @@
 <div id = "userDisplay">
     {% for usercard in Users %}
         <div id = "userCard">
-            <div id = "profilePicture">
+            <img id = "profilePicture" src={{ usercard.pic }}, height="225" width="350">
 
-            </div>
+            </img>
             <div id = "nameAgeCity">
                 <p>   {{ usercard.username }}&nbsp   {{ usercard.age }}&nbsp   {{ usercard.city }}</p>
             </div>
