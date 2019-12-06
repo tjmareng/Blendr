@@ -72,7 +72,7 @@
     {% for usercard in Users %}
         <div id = "userCard">
             <div id = "profilePicture">
-
+                <img src={{ usercard.pic }}, height="225" width="350">
             </div>
             <div id = "nameAgeCity">
                 <p>   {{ usercard.username }}&nbsp   {{ usercard.age }}&nbsp   {{ usercard.city }}</p>

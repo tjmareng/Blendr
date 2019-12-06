@@ -239,9 +239,10 @@ def retrieve_database_users(current_user, filter_age_range, filter_distance_rang
             gender = results.val()[key]["gender"]
             sexuality = results.val()[key]["sexuality"]
             email = results.val()[key]["email"]
+            pic = results.val()[key]["Pic"]
             city = get_city_from_ip_address(results.val()[key]["ip_address"])
             new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
-                                 email=email, age=other_user_age, city=city)
+                                 email=email, age=other_user_age, city=city, pic=pic)
             user_card_list.append(new_user_card)
 
     context_dict = {"Users": user_card_list}
