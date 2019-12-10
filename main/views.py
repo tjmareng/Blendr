@@ -99,7 +99,7 @@ def goto_homepage_url(request):
 @csrf_protect
 def goto_homepage(request, current_user, filter_age_range, filter_distance_range):
     if filter_age_range is None:
-        filter_age_range = 10
+        filter_age_range = 50
     if filter_distance_range is None:
         filter_distance_range = 50
     context_dict = retrieve_database_users(current_user, filter_age_range, filter_distance_range)
@@ -170,7 +170,7 @@ def verify_login_credentials(request):
         user = auth.sign_in_with_email_and_password(email, password)
         current_user = user_info(user['idToken'])
 
-        response = goto_homepage(request, current_user, 10, 50)
+        response = goto_homepage(request, current_user, 50, 50)
         response.set_cookie('user_id_token', user['idToken'], max_age=None)
         user_info(user['idToken'])
         # except HTTPError:
@@ -215,7 +215,7 @@ def get_distance_between_ip_addresses(ip1, ip2):
 
 def retrieve_database_users(current_user, filter_age_range, filter_distance_range):
     if filter_age_range is None:
-        filter_age_range = 10
+        filter_age_range = 50
     if filter_distance_range is None:
         filter_distance_range = 50
     user_card_list = []
@@ -223,6 +223,7 @@ def retrieve_database_users(current_user, filter_age_range, filter_distance_rang
 
     current_user_ip_address = current_user['ip_address']
     current_user_age = current_user['age']
+    current_user_sexuality = current_user['sexuality']
 
     filter_age_range = int(filter_age_range)
     filter_distance_range = int(filter_distance_range)
@@ -231,10 +232,13 @@ def retrieve_database_users(current_user, filter_age_range, filter_distance_rang
 
         other_user_ip_address = results.val()[key]['ip_address']
         other_user_age = results.val()[key]["age"]
+        other_user_gender = results.val()[key]["gender"]
+
         calculated_distance = get_distance_between_ip_addresses(current_user_ip_address, other_user_ip_address)
 
         passed_age_filter = False
         passed_distance_filter = False
+        passed_sexuality_filter = False
 
         if (other_user_age - filter_age_range) <= current_user_age <= (other_user_age + filter_age_range):
             passed_age_filter = True
@@ -242,16 +246,18 @@ def retrieve_database_users(current_user, filter_age_range, filter_distance_rang
         if calculated_distance <= filter_distance_range:
             passed_distance_filter = True
 
-        if passed_age_filter and passed_distance_filter:
+        if other_user_gender == current_user_sexuality:
+            passed_sexuality_filter = True
+
+        if passed_age_filter and passed_distance_filter and passed_sexuality_filter:
             username = results.val()[key]["username"]
             bio = results.val()[key]["biography"]
             birthday = results.val()[key]["birthday"]
-            gender = results.val()[key]["gender"]
             sexuality = results.val()[key]["sexuality"]
             email = results.val()[key]["email"]
             pic = results.val()[key]["Pic"]
             city = get_city_from_ip_address(results.val()[key]["ip_address"])
-            new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=gender, iso=sexuality,
+            new_user_card = UserCard(username=username, biography=bio, birthday=birthday, gender=other_user_gender, iso=sexuality,
                                  email=email, age=other_user_age, city=city, pic=pic)
             user_card_list.append(new_user_card)
 
