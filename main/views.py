@@ -77,7 +77,7 @@ def goto_complete_registration(request):
             # upload user to database
             new_user = {'email': email, 'username': username, 'biography': biography,
                         'sexuality': sexuality, 'gender': gender, 'birthday': birthday,
-                        'age': age, 'friends': friends_list, 'ip_address': ip_address, }
+                        'age': age, 'friends': friends_list, 'ip_address': ip_address, "Pic": ""}
             db.child("users").child(clean_email(email)).set(new_user)
 
             # authentication process
