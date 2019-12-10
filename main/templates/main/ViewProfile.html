@@ -36,16 +36,17 @@
     <form action={% url 'update_profile' %} method="POST">
         {% csrf_token %}
         <div id="profileInputs">
+
 <br>
             <div id="username">
-                <header>Name:</header>
+                <strong><header>Name:</header></strong>
                 <label>
                     <input type="text" name="Username" value="{{ username }}"/>
                 </label>
 
             </div>
         <br>
-        <header>Biography:</header>
+        <strong><header>Biography:</header></strong>
 
             <div id="biography">
                 <label>
@@ -122,7 +123,7 @@
             </style>
 
             <div id="gender">
-                <header>Gender:</header>
+                <strong><header>Gender:</header></strong>
 
                 {%  if gender == "male" %}
                     <label class="container">Male
@@ -149,7 +150,7 @@
             <br>
 
             <div id="sexuality">
-                <header>Interested in:</header>
+                <strong><header>Interested in:</header></strong>
                 {%  if sexuality == "male" %}
                     <label class="container">Male
                         <input type="radio" name="sexuality" value="male" checked >

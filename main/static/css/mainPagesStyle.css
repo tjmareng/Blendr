@@ -247,13 +247,25 @@ transform: scale(1.2);
     left: 33%;
     border: solid gray 1px;
     width: 500px;
-    height: 600px;
-    background-color:white;
+    height: 418px;
+    background-color: white;
     border-radius: 10px;
     margin-right: 60px;
-    margin-top:60px;
+    margin-top: 60px;
     font-family: Calibri;
     text-align: center;
+
+}
+input[name="complete_registration"] {
+    background-color: black;
+    width: 150px;
+    border: none;
+    font-family: Calibri;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    font-size: 15pt;
+    margin: 10px;
 }
 
 
