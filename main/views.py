@@ -153,8 +153,10 @@ def user_info(user_token):
     email = card_info.val()[key]['email']
     ip_address = card_info.val()[key]['ip_address']
     friends = card_info.val()[key]['friends']
+    picture = card_info.val()[key]['Pic']
     info_dict = {'username': username, "age": age, "biography": biography, "sexuality": sexuality,
-                 "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address, "friends": friends,}
+                 "gender": gender, "birthday": birthday, "email": email, "ip_address": ip_address, "friends": friends,
+                 "Pic": picture,}
     return info_dict
 
 @csrf_protect
