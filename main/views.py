@@ -77,7 +77,7 @@ def goto_complete_registration(request):
             # upload user to database
             new_user = {'email': email, 'username': username, 'biography': biography,
                         'sexuality': sexuality, 'gender': gender, 'birthday': birthday,
-                        'age': age, 'friends': friends_list, 'ip_address': ip_address, "Pic": ""}
+                        'age': age, 'friends': friends_list, 'ip_address': ip_address, "Pic": "https://firebasestorage.googleapis.com/v0/b/blendr-c1bd5.appspot.com/o/Pics%2F10.jpg?alt=media&token=2850865e-f28f-4809-80c2-779b7c42a0c4"}
             db.child("users").child(clean_email(email)).set(new_user)
 
             # authentication process
